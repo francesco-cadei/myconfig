@@ -1,7 +1,233 @@
-* Obiettivo del sito:
-- condividere la mia configurazione
+* goal
+share configurations for digital emancipation
 
-* principi
-- libertà
-- privacy
-- minimalismo
+* principles
+1. freedom (open licenses)
+2. privacy protection
+3. minimalism
+4. stability
+
+* computer
+
+** os
+- download https://www.debian.org/ and mount iso on USB
+- boot from USB
+
+*** graphic installation
+- for the hostname use: deb
+- don't put root password (allows using sudo)
+- use LVM encrypted (encrypt the os)
+- for now do not install the desktop environment but only: standard system utilities, print server
+
+*** manual installation
+- login: enter user and password on tty2
+- connect an ethernet cable or a smartphone in USB tethering mode
+- run a ~sudo apt update~ and ~sudo apt upgrade~
+- then launch:
+
+#+begin_src bash
+  sudo apt install \
+       gnome-session \
+       gnome-terminal \
+       gnome-shell-extension-prefs \
+       gnome-tweaks \
+       seahorse \
+       gnome-disk-utility \
+       nautilus \
+       mpv \
+       eog
+#+end_src
+
+*** settings
+- since it is encrypted, it is advisable to enable: Settings > User > Automatic Login
+- on =gnome-terminal= using =nano= (=^= stands for =ctrl=) modify the following files:
+
+**** grub
+=/etc/default/grub= to have =GRUB_TIMEOUT=1= and =GRUB_TERMINAL=console=, then run ~sudo update-grub~
+
+**** sources
+=/etc/apt/sources.list= to have:
+#+begin_example
+deb http://deb.debian.org/debian/ stable main contrib non-free non-free-firmware
+deb-src http://deb.debian.org/debian/ stable main contrib non-free non-free-firmware
+
+deb http://deb.debian.org/debian/ stable-updates main contrib non-free non-free-firmware
+deb-src http://deb.debian.org/debian/ stable-updates main contrib non-free non-free-firmware
+#+end_example
+then you can install firmware non-free, in my case (lenovo thinkpad x1 1ts gen) ~sudo apt install firmware-iwlwifi~
+
+**** bluetooth
+=/etc/bluetooth/main.conf= to have: =AutoEnable=false=
+
+**** mpv
+create a  =~/.config/mpv/mpv.conf= and add =fs=yes=
+
+** browser
+~sudo apt install firefox-esr~ then write =about:config= in the address bar and set:
+- =privacy.resistFingerprinting= to true
+- =network.security.esni.enabled= to true
+- =extensions.screenshots.disabled= to true
+
+in settings set:
+- DuckDuckGo as Default Search Engine
+- in Enhanced Tracking Protection set Custom with blocking of cookies from unvisited sites
+- "Do Not Track" always
+- Delete cookies and site data when Firefox is closed with the exception of a few sites
+- history: custom, only when i close firefox
+- OCSP disabled
+- HTTPS-Only in all windows
+- DNS secure: MaxProtection - NextDNS
+
+*** advanced privacy (compromises some services)
+write =about:config= in the address bar and set:
+- =media.peerconnection.enabled= a false
+- =media.navigator.enabled= a false
+- =webgl.disabled= a true
+
+*** add-ons
+- uBlock Origin
+- ClearURLs
+- Font Fingerprint Defender
+- Maximize All Windows (Minimalist Version)
+- Bitwarden
+- Simple Translate
+
+**** GNOME Shell integration
+- Auto Move Windows
+- Auto Activities
+- Unite
+- EasyScreenCast
+
+** more privacy
+still using =gnome-terminal= and =nano=:
+*** nextdns per so
+run ~sudo apt install systemd-resolved~ and modify =/etc/systemd/resolved.conf= to have [[https://my.nextdns.io]] setups
+
+*** privoxy-tor
+run ~sudo apt install privoxy tor~ and modify =/etc/privoxy/config= to have =forward-socks5t=
+under: Settings > Network > Network Proxy > Manual; set:
+#+begin_example
+  HTTP: 127.0.0.1 8118
+  HTTPS: 127.0.0.1 8118
+  Socks: 127.0.0.1 9050
+#+end_example
+
+** sync files
+#+begin_src bash
+  sudo apt install syncthing
+
+  systemctl --user enable syncthing.service
+#+end_src
+
+** vc
+#+begin_src bash
+  sudo apt install git
+
+  git config --global user.signinKey <key>
+  git config --global user.name <name>
+  git config --global user.email <email>
+  git config --global commit.gpgsign true
+#+end_src
+
+** editor
+#+begin_src bash
+  sudo apt install \
+       emacs \
+       hunspell-en-us \
+       hunspell-it \
+       ripgrep \
+       libtool-bin \
+       libvterm-dev
+#+end_src
+
+~git clone git@github.com:francesco-cadei/.emacs.d.git~
+you can now ~sudo apt autoremove --purge gnome-terminal~ and use terminal inside emacs with =C-x C-d=.
+
+*** languages
+
+**** tex
+#+begin_src bash
+  sudo apt install \
+       texlive \
+       texlive-pictures \
+       texlive-publisher \
+       texlive-pictures \
+       dvipng
+#+end_src
+
+**** c
+
+#+begin_src bash
+  sudo apt install \
+       cmake \
+       clang \
+       libclang-dev
+#+end_src
+
+**** java
+#+begin_src bash
+  sudo apt install \
+       openjdk-17-jdk \
+       openjdk-17-source
+#+end_src
+
+** power manager
+install specific package for thinkpad's fan:
+#+begin_src bash
+  sudo apt install \
+       acpi-call-dkms \
+       thinkfan \
+       tp-smapi-dkms
+#+end_src
+
+*** tlp
+#+begin_src bash
+  sudo apt install tlp tlp-rdw
+
+  sudo tlp start
+  sudo tlp-stat
+#+end_src
+
+*** powertop
+#+begin_src bash
+  sudo apt install powertop
+
+  sudo systemctl enable powertop.service
+#+end_src
+
+** other stuff
+~sudo apt install libreoffice libreoffice-gnome~
+
+* mobile
+- do initial setup without google account (prefer a device with pure android)
+- /I use Nokia because of the partnership with [[https://www.ifixit.com/][https://www.ifixit.com/]]/
+- under: Settings > Network & internet > Private DNS; use [[https://www.ifixit.com/][https://www.ifixit.com/]] config
+- with usb cable provide [[https://f-droid.org/][https://f-droid.org/]] apk, install it
+- install OpenBoard from F-Droid and disable GBoard
+- uninstall or disable all unused app
+
+** F-Droid, installs:
+- Olauncher
+- Syncthing, DecSync CC, Etar, Orgzily
+- ViMusic, Tuta, Silence, Breathly
+- LibreTorrent, VLC
+- Librera FD
+- Aurora Store
+
+** Aurora Store, installs:
+- Bitwarden, PosteID, Wise
+- Firefox
+- Maps, Translate
+- Trainline
+- Beats
+
+*** Firefox extensions
+- uBlock Origin
+- ClearURLs
+- Video Background Play Fix
+
+** another mobile (backup), installs:
+- F-Droid
+- OpenBoard
+- Syncthing
+- Aegis

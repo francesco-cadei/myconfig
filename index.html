@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title></title>
+<!-- 2024-06-08 sab 11:23 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Org-mode">
+<meta name="author" content="Francesco Cadei">
+
+<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style>
+/* org mode styles on top of twbs */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    font-size: 18px;
+    margin-bottom: 105px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 101px;
+    background-color: #f5f5f5;
+}
+
+footer > div {
+    padding: 10px;
+}
+
+footer p {
+    margin: 0 0 5px;
+    text-align: center;
+    font-size: 16px;
+}
+
+#table-of-contents {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+blockquote p {
+    font-size: 18px;
+}
+
+pre {
+    font-size: 16px;
+}
+
+.footpara {
+    display: inline-block;
+}
+
+figcaption {
+  font-size: 16px;
+  color: #666;
+  font-style: italic;
+  padding-bottom: 15px;
+}
+
+/* from twbs docs */
+
+.bs-docs-sidebar.affix {
+    position: static;
+}
+@media (min-width: 768px) {
+    .bs-docs-sidebar {
+        padding-left: 20px;
+    }
+}
+
+/* All levels of nav */
+.bs-docs-sidebar .nav > li > a {
+    display: block;
+    padding: 4px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #999;
+}
+.bs-docs-sidebar .nav > li > a:hover,
+.bs-docs-sidebar .nav > li > a:focus {
+    padding-left: 19px;
+    color: #A1283B;
+    text-decoration: none;
+    background-color: transparent;
+    border-left: 1px solid #A1283B;
+}
+.bs-docs-sidebar .nav > .active > a,
+.bs-docs-sidebar .nav > .active:hover > a,
+.bs-docs-sidebar .nav > .active:focus > a {
+    padding-left: 18px;
+    font-weight: bold;
+    color: #A1283B;
+    background-color: transparent;
+    border-left: 2px solid #A1283B;
+}
+
+/* Nav: second level (shown on .active) */
+.bs-docs-sidebar .nav .nav {
+    display: none; /* Hide by default, but at >768px, show it */
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 30px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav > li > a:focus {
+    padding-left: 29px;
+}
+.bs-docs-sidebar .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav > .active:focus > a {
+    padding-left: 28px;
+    font-weight: 500;
+}
+
+/* Nav: third level (shown on .active) */
+.bs-docs-sidebar .nav .nav .nav {
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 40px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav .nav > li > a:focus {
+    padding-left: 39px;
+}
+.bs-docs-sidebar .nav .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav .nav > .active:focus > a {
+    padding-left: 38px;
+    font-weight: 500;
+}
+
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) {
+    .bs-docs-sidebar .nav > .active > ul {
+        display: block;
+    }
+    /* Widen the fixed sidebar */
+    .bs-docs-sidebar.affix,
+    .bs-docs-sidebar.affix-bottom {
+        width: 213px;
+    }
+    .bs-docs-sidebar.affix {
+        position: fixed; /* Undo the static from mobile first approach */
+        top: 20px;
+    }
+    .bs-docs-sidebar.affix-bottom {
+        position: absolute; /* Undo the static from mobile first approach */
+    }
+    .bs-docs-sidebar.affix .bs-docs-sidenav,.bs-docs-sidebar.affix-bottom .bs-docs-sidenav {
+        margin-top: 0;
+        margin-bottom: 0
+    }
+}
+@media (min-width: 1200px) {
+    /* Widen the fixed sidebar again */
+    .bs-docs-sidebar.affix-bottom,
+    .bs-docs-sidebar.affix {
+        width: 263px;
+    }
+}
+</style>
+<script>
+$(function() {
+    'use strict';
+
+    $('.bs-docs-sidebar li').first().addClass('active');
+
+    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
+
+    $('.bs-docs-sidebar').affix();
+});
+</script>
+</head>
+<body>
+<div id="content" class="container">
+<div class="row"><div class="col-md-3 col-md-push-9"><nav id="table-of-contents">
+<div id="text-table-of-contents" class="bs-docs-sidebar">
+<ul class="nav">
+<li><a href="#sec-1">1. goal</a></li>
+<li><a href="#sec-2">2. principles</a></li>
+<li><a href="#sec-3">3. computer</a>
+<ul class="nav">
+<li><a href="#sec-3-1">3.1. os</a></li>
+<li><a href="#sec-3-2">3.2. browser</a></li>
+<li><a href="#sec-3-3">3.3. more privacy</a></li>
+<li><a href="#sec-3-4">3.4. sync files</a></li>
+<li><a href="#sec-3-5">3.5. vc</a></li>
+<li><a href="#sec-3-6">3.6. editor</a></li>
+<li><a href="#sec-3-7">3.7. power manager</a></li>
+<li><a href="#sec-3-8">3.8. other stuff</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. mobile</a>
+<ul class="nav">
+<li><a href="#sec-4-1">4.1. F-Droid, installs:</a></li>
+<li><a href="#sec-4-2">4.2. Aurora Store, installs:</a></li>
+<li><a href="#sec-4-3">4.3. another mobile (backup), installs:</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+</div><div class="col-md-9 col-md-pull-3"><h1 class="title"></h1>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> goal</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+share configurations for digital emancipation
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> principles</h2>
+<div class="outline-text-2" id="text-2">
+<ol class="org-ol">
+<li>freedom (open licenses)
+</li>
+<li>privacy protection
+</li>
+<li>minimalism
+</li>
+<li>stability
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> computer</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> os</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>download <a href="https://www.debian.org/">https://www.debian.org/</a> and mount iso on USB
+</li>
+<li>boot from USB
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-3-1-1" class="outline-4">
+<h4 id="sec-3-1-1"><span class="section-number-4">3.1.1</span> graphic installation</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<ul class="org-ul">
+<li>for the hostname use: deb
+</li>
+<li>don't put root password (allows using sudo)
+</li>
+<li>use LVM encrypted (encrypt the os)
+</li>
+<li>for now do not install the desktop environment but only: standard system utilities, print server
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1-2" class="outline-4">
+<h4 id="sec-3-1-2"><span class="section-number-4">3.1.2</span> manual installation</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<ul class="org-ul">
+<li>login: enter user and password on tty2
+</li>
+<li>connect an ethernet cable or a smartphone in USB tethering mode
+</li>
+<li>run a <code>sudo apt update</code> and <code>sudo apt upgrade</code>
+</li>
+<li>then launch:
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-bash">sudo apt install <span style="color: #2544bb;">\</span>
+     gnome-session <span style="color: #2544bb;">\</span>
+     gnome-terminal <span style="color: #2544bb;">\</span>
+     gnome-shell-extension-prefs <span style="color: #2544bb;">\</span>
+     gnome-tweaks <span style="color: #2544bb;">\</span>
+     seahorse <span style="color: #2544bb;">\</span>
+     gnome-disk-utility <span style="color: #2544bb;">\</span>
+     nautilus <span style="color: #2544bb;">\</span>
+     mpv <span style="color: #2544bb;">\</span>
+     eog
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1-3" class="outline-4">
+<h4 id="sec-3-1-3"><span class="section-number-4">3.1.3</span> settings</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<ul class="org-ul">
+<li>since it is encrypted, it is advisable to enable: Settings &gt; User &gt; Automatic Login
+</li>
+<li>on <code>gnome-terminal</code> using <code>nano</code> (<code>^</code> stands for <code>ctrl</code>) modify the following files:
+</li>
+</ul>
+</div>
+
+<ol class="org-ol"><li><a id="sec-3-1-3-1" name="sec-3-1-3-1"></a>grub<br ><div class="outline-text-5" id="text-3-1-3-1">
+<p>
+<code>/etc/default/grub</code> to have <code>GRUB_TIMEOUT=1</code> and <code>GRUB_TERMINAL=console</code>, then run <code>sudo update-grub</code>
+</p>
+</div>
+</li>
+
+<li><a id="sec-3-1-3-2" name="sec-3-1-3-2"></a>sources<br ><div class="outline-text-5" id="text-3-1-3-2">
+<p>
+<code>/etc/apt/sources.list</code> to have:
+</p>
+<pre class="example">
+deb http://deb.debian.org/debian/ stable main contrib non-free non-free-firmware
+deb-src http://deb.debian.org/debian/ stable main contrib non-free non-free-firmware
+
+deb http://deb.debian.org/debian/ stable-updates main contrib non-free non-free-firmware
+deb-src http://deb.debian.org/debian/ stable-updates main contrib non-free non-free-firmware
+</pre>
+<p>
+then you can install firmware non-free, in my case (lenovo thinkpad x1 1ts gen) <code>sudo apt install firmware-iwlwifi</code>
+</p>
+</div>
+</li>
+
+<li><a id="sec-3-1-3-3" name="sec-3-1-3-3"></a>bluetooth<br ><div class="outline-text-5" id="text-3-1-3-3">
+<p>
+<code>/etc/bluetooth/main.conf</code> to have: <code>AutoEnable=false</code>
+</p>
+</div>
+</li>
+
+<li><a id="sec-3-1-3-4" name="sec-3-1-3-4"></a>mpv<br ><div class="outline-text-5" id="text-3-1-3-4">
+<p>
+create a  <code>~/.config/mpv/mpv.conf</code> and add <code>fs=yes</code>
+</p>
+</div>
+</li></ol>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> browser</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+<code>sudo apt install firefox-esr</code> then write <code>about:config</code> in the address bar and set:
+</p>
+<ul class="org-ul">
+<li><code>privacy.resistFingerprinting</code> to true
+</li>
+<li><code>network.security.esni.enabled</code> to true
+</li>
+<li><code>extensions.screenshots.disabled</code> to true
+</li>
+</ul>
+
+<p>
+in settings set:
+</p>
+<ul class="org-ul">
+<li>DuckDuckGo as Default Search Engine
+</li>
+<li>in Enhanced Tracking Protection set Custom with blocking of cookies from unvisited sites
+</li>
+<li>"Do Not Track" always
+</li>
+<li>Delete cookies and site data when Firefox is closed with the exception of a few sites
+</li>
+<li>history: custom, only when i close firefox
+</li>
+<li>OCSP disabled
+</li>
+<li>HTTPS-Only in all windows
+</li>
+<li>DNS secure: MaxProtection - NextDNS
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> advanced privacy (compromises some services)</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+write <code>about:config</code> in the address bar and set:
+</p>
+<ul class="org-ul">
+<li><code>media.peerconnection.enabled</code> a false
+</li>
+<li><code>media.navigator.enabled</code> a false
+</li>
+<li><code>webgl.disabled</code> a true
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2-2" class="outline-4">
+<h4 id="sec-3-2-2"><span class="section-number-4">3.2.2</span> add-ons</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<ul class="org-ul">
+<li>uBlock Origin
+</li>
+<li>ClearURLs
+</li>
+<li>Font Fingerprint Defender
+</li>
+<li>Maximize All Windows (Minimalist Version)
+</li>
+<li>Bitwarden
+</li>
+<li>Simple Translate
+</li>
+</ul>
+</div>
+
+<ol class="org-ol"><li><a id="sec-3-2-2-1" name="sec-3-2-2-1"></a>GNOME Shell integration<br ><div class="outline-text-5" id="text-3-2-2-1">
+<ul class="org-ul">
+<li>Auto Move Windows
+</li>
+<li>Auto Activities
+</li>
+<li>Unite
+</li>
+<li>EasyScreenCast
+</li>
+</ul>
+</div>
+</li></ol>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> more privacy</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+still using <code>gnome-terminal</code> and <code>nano</code>:
+</p>
+</div>
+<div id="outline-container-sec-3-3-1" class="outline-4">
+<h4 id="sec-3-3-1"><span class="section-number-4">3.3.1</span> nextdns per so</h4>
+<div class="outline-text-4" id="text-3-3-1">
+<p>
+run <code>sudo apt install systemd-resolved</code> and modify <code>/etc/systemd/resolved.conf</code> to have <a href="https://my.nextdns.io">https://my.nextdns.io</a> setups
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3-2" class="outline-4">
+<h4 id="sec-3-3-2"><span class="section-number-4">3.3.2</span> privoxy-tor</h4>
+<div class="outline-text-4" id="text-3-3-2">
+<p>
+run <code>sudo apt install privoxy tor</code> and modify <code>/etc/privoxy/config</code> to have <code>forward-socks5t</code>
+under: Settings &gt; Network &gt; Network Proxy &gt; Manual; set:
+</p>
+<pre class="example">
+HTTP: 127.0.0.1 8118
+HTTPS: 127.0.0.1 8118
+Socks: 127.0.0.1 9050
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> sync files</h3>
+<div class="outline-text-3" id="text-3-4">
+<div class="org-src-container">
+
+<pre class="src src-bash">sudo apt install syncthing
+
+systemctl --user enable syncthing.service
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> vc</h3>
+<div class="outline-text-3" id="text-3-5">
+<div class="org-src-container">
+
+<pre class="src src-bash">sudo apt install git
+
+git config --global user.signinKey &lt;key&gt;
+git config --global user.name &lt;name&gt;
+git config --global user.email &lt;email&gt;
+git config --global commit.gpgsign true
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-6" class="outline-3">
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> editor</h3>
+<div class="outline-text-3" id="text-3-6">
+<div class="org-src-container">
+
+<pre class="src src-bash">sudo apt install <span style="color: #2544bb;">\</span>
+     emacs <span style="color: #2544bb;">\</span>
+     hunspell-en-us <span style="color: #2544bb;">\</span>
+     hunspell-it <span style="color: #2544bb;">\</span>
+     ripgrep <span style="color: #2544bb;">\</span>
+     libtool-bin <span style="color: #2544bb;">\</span>
+     libvterm-dev
+</pre>
+</div>
+
+<p>
+<code>git clone git@github.com:francesco-cadei/.emacs.d.git</code>
+you can now <code>sudo apt autoremove --purge gnome-terminal</code> and use terminal inside emacs with <code>C-x C-d</code>.
+</p>
+</div>
+
+<div id="outline-container-sec-3-6-1" class="outline-4">
+<h4 id="sec-3-6-1"><span class="section-number-4">3.6.1</span> languages</h4>
+<div class="outline-text-4" id="text-3-6-1">
+</div><ol class="org-ol"><li><a id="sec-3-6-1-1" name="sec-3-6-1-1"></a>tex<br ><div class="outline-text-5" id="text-3-6-1-1">
+<div class="org-src-container">
+
+<pre class="src src-bash">sudo apt install <span style="color: #2544bb;">\</span>
+     texlive <span style="color: #2544bb;">\</span>
+     texlive-pictures <span style="color: #2544bb;">\</span>
+     texlive-publisher <span style="color: #2544bb;">\</span>
+     texlive-pictures <span style="color: #2544bb;">\</span>
+     dvipng
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="sec-3-6-1-2" name="sec-3-6-1-2"></a>c<br ><div class="outline-text-5" id="text-3-6-1-2">
+<div class="org-src-container">
+
+<pre class="src src-bash">sudo apt install <span style="color: #2544bb;">\</span>
+     cmake <span style="color: #2544bb;">\</span>
+     clang <span style="color: #2544bb;">\</span>
+     libclang-dev
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="sec-3-6-1-3" name="sec-3-6-1-3"></a>java<br ><div class="outline-text-5" id="text-3-6-1-3">
+<div class="org-src-container">
+
+<pre class="src src-bash">sudo apt install <span style="color: #2544bb;">\</span>
+     openjdk-17-jdk <span style="color: #2544bb;">\</span>
+     openjdk-17-source
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+</div>
+
+<div id="outline-container-sec-3-7" class="outline-3">
+<h3 id="sec-3-7"><span class="section-number-3">3.7</span> power manager</h3>
+<div class="outline-text-3" id="text-3-7">
+<p>
+install specific package for thinkpad's fan:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-bash">sudo apt install <span style="color: #2544bb;">\</span>
+     acpi-call-dkms <span style="color: #2544bb;">\</span>
+     thinkfan <span style="color: #2544bb;">\</span>
+     tp-smapi-dkms
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-3-7-1" class="outline-4">
+<h4 id="sec-3-7-1"><span class="section-number-4">3.7.1</span> tlp</h4>
+<div class="outline-text-4" id="text-3-7-1">
+<div class="org-src-container">
+
+<pre class="src src-bash">sudo apt install tlp tlp-rdw
+
+sudo tlp start
+sudo tlp-stat
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-7-2" class="outline-4">
+<h4 id="sec-3-7-2"><span class="section-number-4">3.7.2</span> powertop</h4>
+<div class="outline-text-4" id="text-3-7-2">
+<div class="org-src-container">
+
+<pre class="src src-bash">sudo apt install powertop
+
+sudo systemctl enable powertop.service
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-8" class="outline-3">
+<h3 id="sec-3-8"><span class="section-number-3">3.8</span> other stuff</h3>
+<div class="outline-text-3" id="text-3-8">
+<p>
+<code>sudo apt install libreoffice libreoffice-gnome</code>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> mobile</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>do initial setup without google account (prefer a device with pure android)
+</li>
+<li><i>I use Nokia because of the partnership with <a href="https://www.ifixit.com/">https://www.ifixit.com/</a></i>
+</li>
+<li>under: Settings &gt; Network &amp; internet &gt; Private DNS; use <a href="https://www.ifixit.com/">https://www.ifixit.com/</a> config
+</li>
+<li>with usb cable provide <a href="https://f-droid.org/">https://f-droid.org/</a> apk, install it
+</li>
+<li>install OpenBoard from F-Droid and disable GBoard
+</li>
+<li>uninstall or disable all unused app
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> F-Droid, installs:</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>Olauncher
+</li>
+<li>Syncthing, DecSync CC, Etar, Orgzily
+</li>
+<li>ViMusic, Tuta, Silence, Breathly
+</li>
+<li>LibreTorrent, VLC
+</li>
+<li>Librera FD
+</li>
+<li>Aurora Store
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Aurora Store, installs:</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li>Bitwarden, PosteID, Wise
+</li>
+<li>Firefox
+</li>
+<li>Maps, Translate
+</li>
+<li>Trainline
+</li>
+<li>Beats
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-4-2-1" class="outline-4">
+<h4 id="sec-4-2-1"><span class="section-number-4">4.2.1</span> Firefox extensions</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<ul class="org-ul">
+<li>uBlock Origin
+</li>
+<li>ClearURLs
+</li>
+<li>Video Background Play Fix
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> another mobile (backup), installs:</h3>
+<div class="outline-text-3" id="text-4-3">
+<ul class="org-ul">
+<li>F-Droid
+</li>
+<li>OpenBoard
+</li>
+<li>Syncthing
+</li>
+<li>Aegis
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></div>
+<footer id="postamble" class="">
+<div><p class="author">Author: Francesco Cadei</p>
+<p class="date">Created: 2024-06-08 sab 11:23</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="http://orgmode.org">Org-mode</a> 9.5.5)</p>
+</div>
+</footer>
+</body>
+</html>
