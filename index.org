@@ -7,6 +7,8 @@ share configurations for digital emancipation
 3. minimalism
 4. stability
 
+compare software with [[https://alternativeto.net/][https://alternativeto.net/]]
+
 * computer
 
 ** os
@@ -112,6 +114,8 @@ under: Settings > Network > Network Proxy > Manual; set:
   Socks: 127.0.0.1 9050
 #+end_example
 
+test privacy with [[https://browserleaks.com/][https://browserleaks.com/]]
+
 ** sync files
 #+begin_src bash
   sudo apt install syncthing
@@ -201,7 +205,7 @@ install specific package for thinkpad's fan:
 * mobile /(or tablet)/
 - do initial setup of an android device without google account (prefer a device with pure android)
 - /i use Nokia because of the partnership with [[https://www.ifixit.com/][https://www.ifixit.com/]]/
-- under: Settings > Network & internet > Private DNS; use [[https://www.ifixit.com/][https://www.ifixit.com/]] config
+- under: Settings > Network & internet > Private DNS; use [[https://nextdns.io/]] config
 - with usb cable provide [[https://f-droid.org/][https://f-droid.org/]] apk, install it
 - install OpenBoard from F-Droid and disable GBoard
 - uninstall or disable all unused app
