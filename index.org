@@ -198,9 +198,9 @@ install specific package for thinkpad's fan:
 ** other stuff
 ~sudo apt install libreoffice libreoffice-gnome~
 
-* mobile
-- do initial setup without google account (prefer a device with pure android)
-- /I use Nokia because of the partnership with [[https://www.ifixit.com/][https://www.ifixit.com/]]/
+* mobile /(or tablet)/
+- do initial setup of an android device without google account (prefer a device with pure android)
+- /i use Nokia because of the partnership with [[https://www.ifixit.com/][https://www.ifixit.com/]]/
 - under: Settings > Network & internet > Private DNS; use [[https://www.ifixit.com/][https://www.ifixit.com/]] config
 - with usb cable provide [[https://f-droid.org/][https://f-droid.org/]] apk, install it
 - install OpenBoard from F-Droid and disable GBoard
