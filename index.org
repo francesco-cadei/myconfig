@@ -80,9 +80,9 @@ in settings set:
 
 *** advanced privacy (compromises some services)
 write =about:config= in the address bar and set:
-- =media.peerconnection.enabled= a false
-- =media.navigator.enabled= a false
-- =webgl.disabled= a true
+- =media.peerconnection.enabled= to false
+- =media.navigator.enabled= to false
+- =webgl.disabled= to true
 
 *** add-ons
 - uBlock Origin
