@@ -7,7 +7,7 @@ share configurations for digital emancipation
 3. minimalism
 4. stability
 
-compare software with [[https://alternativeto.net/][https://alternativeto.net/]]
+compare software and service with [[https://alternativeto.net/][https://alternativeto.net/]]
 
 * computer
 
