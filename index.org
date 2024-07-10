@@ -213,10 +213,11 @@ install specific package for thinkpad's fan:
 ** F-Droid, installs:
 - Olauncher
 - Syncthing, DecSync CC, Etar, Orgzily
-- NewPipe, Tuta, Silence, My Location
+- RiMusic, Tuta, Silence, My Location
 - LibreTorrent, VLC
 - Librera FD, Breathly
 - Aurora Store
+- My Location
 
 ** Aurora Store, installs:
 - Bitwarden, PosteID, Wise
