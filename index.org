@@ -98,7 +98,7 @@ write =about:config= in the address bar and set:
 - Auto Move Windows
 - Auto Activities
 - Unite
-- EasyScreenCast
+- Hide Top Bar
 
 ** more privacy
 still using =gnome-terminal= and =nano=:
